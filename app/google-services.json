@@ -1,0 +1,163 @@
+{
+  "project_info": {
+    "project_number": "968636488645",
+    "firebase_url": "https://teacher-escuela.firebaseio.com",
+    "project_id": "teacher-escuela",
+    "storage_bucket": "teacher-escuela.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:968636488645:android:179e850742ca6900",
+        "android_client_info": {
+          "package_name": "com.escuela.escuela_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "968636488645-lnnscr1au6lvh2b696qt6nlccbqrp2dc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDxtAii0BMAftHod5WnTl0fYrtWDZWmcWo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "968636488645-6t0vu8rc5abru6invstajqhog7rfb134.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "968636488645-cama7g4h8tf1neb0qvfbetjh2orp6n0l.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.escuela.escuelaApp"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:968636488645:android:3255e6d5e4f32d831d09ac",
+        "android_client_info": {
+          "package_name": "com.escuela.test"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "968636488645-lnnscr1au6lvh2b696qt6nlccbqrp2dc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDxtAii0BMAftHod5WnTl0fYrtWDZWmcWo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "968636488645-6t0vu8rc5abru6invstajqhog7rfb134.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "968636488645-cama7g4h8tf1neb0qvfbetjh2orp6n0l.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.escuela.escuelaApp"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:968636488645:android:95b3baee9a96f4fb1d09ac",
+        "android_client_info": {
+          "package_name": "com.rudiwork.teacher_escuela_stat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "968636488645-lnnscr1au6lvh2b696qt6nlccbqrp2dc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDxtAii0BMAftHod5WnTl0fYrtWDZWmcWo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "968636488645-6t0vu8rc5abru6invstajqhog7rfb134.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "968636488645-cama7g4h8tf1neb0qvfbetjh2orp6n0l.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.escuela.escuelaApp"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:968636488645:android:86dac54fc4ff4dc21d09ac",
+        "android_client_info": {
+          "package_name": "ru.kh.bannermanager"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "968636488645-j3ssba4ibcjl108issv8le5g4f57g4fj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ru.kh.bannermanager",
+            "certificate_hash": "d923e31c4f3937f8643cd03c55577c6da1345ff6"
+          }
+        },
+        {
+          "client_id": "968636488645-lnnscr1au6lvh2b696qt6nlccbqrp2dc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDxtAii0BMAftHod5WnTl0fYrtWDZWmcWo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "968636488645-6t0vu8rc5abru6invstajqhog7rfb134.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "968636488645-cama7g4h8tf1neb0qvfbetjh2orp6n0l.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.escuela.escuelaApp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
