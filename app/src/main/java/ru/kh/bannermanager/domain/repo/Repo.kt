@@ -5,6 +5,6 @@ import ru.kh.bannermanager.domain.entity.PromotionEntity
 
 interface Repo {
     fun getObservableDocuments(): Single<ArrayList<PromotionEntity>>
-    fun deletePromotion()
+    fun deletePromotion(id: String)
     fun addDocument(document: PromotionEntity)
 }

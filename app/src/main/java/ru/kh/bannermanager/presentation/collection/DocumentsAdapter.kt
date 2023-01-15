@@ -1,5 +1,6 @@
 package ru.kh.bannermanager.presentation.collection
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,14 +18,18 @@ class DocumentsAdapter : RecyclerView.Adapter<DocumentsAdapter.CollectionItemHol
         val popuMenu = itemView.findViewById<ImageView>(R.id.img_popup_menu)
     }
 
-    interface DeleteDocument{
-        fun deleteDocument(id : Int)
+    interface DeleteDocumentListener{
+        fun deleteDocument(id : String)
     }
 
     private var data = ArrayList<PromotionEntity>()
-
+    private lateinit var deleteListener: DeleteDocumentListener
     fun setData(data: ArrayList<PromotionEntity>) {
         this.data = data
+    }
+
+    fun setDeleteListener(listener: DeleteDocumentListener){
+        deleteListener = listener
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CollectionItemHolder {
@@ -44,9 +49,11 @@ class DocumentsAdapter : RecyclerView.Adapter<DocumentsAdapter.CollectionItemHol
                 when (it.itemId) {
                     R.id.delete_popup_menu_item -> {
                         val actualPosition = holder.adapterPosition
+                        deleteListener.deleteDocument(data[actualPosition].id!!)
                         data.removeAt(actualPosition)
                         notifyItemRemoved(actualPosition)
                         notifyItemRangeChanged(actualPosition, data.size)
+
                     }
                 }
                 true

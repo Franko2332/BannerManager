@@ -27,6 +27,10 @@ class DocumentsViewModel(private val repo: Repo) {
         return appStateData
     }
 
+    fun deleteDocument(id: String){
+        repo.deletePromotion(id)
+    }
+
     /*fun addDocument(document: PromotionEntity){
         appStateLiveData.postValue(DownloadDocumentsAppState.Loading)
         FirebaseFirestore.getInstance().collection("promotions").document().set(document).addOnFailureListener {

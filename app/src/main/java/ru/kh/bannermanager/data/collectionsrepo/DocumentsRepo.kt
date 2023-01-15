@@ -19,11 +19,17 @@ class DocumentsRepo() : Repo {
                         data.add(ent)
                     }
                     emitter.onSuccess(data)
-                }.addOnFailureListener { error -> Log.e("FIRESTORE LOAD ERROR", error.toString())
-                    emitter.onError(error) }
+                }.addOnFailureListener { error ->
+                    Log.e("FIRESTORE LOAD ERROR", error.toString())
+                    emitter.onError(error)
+                }
         }
 
-    override fun deletePromotion() {
+    override fun deletePromotion(id: String){
+        FirebaseFirestore.getInstance().collection(COLLECTION_NAME).document(id.toString()).delete()
+            .addOnSuccessListener {
+                Log.v("FIRESTORE", "DELETE IS SUCCESS")
+            }.addOnFailureListener { Log.e("ERROR", it.toString()) }
     }
 
     override fun addDocument(document: PromotionEntity) {

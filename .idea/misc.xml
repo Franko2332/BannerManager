@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/drawable/ic_baseline_more_vert_24.xml" value="0.1865" />
+        <entry key="app/src/main/res/layout/activity_add_document.xml" value="0.335" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="app/src/main/res/layout/collections_items.xml" value="0.1765625" />
         <entry key="app/src/main/res/layout/documents_items.xml" value="0.335" />

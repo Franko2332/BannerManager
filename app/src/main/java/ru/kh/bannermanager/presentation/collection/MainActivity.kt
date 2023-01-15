@@ -1,11 +1,10 @@
 package ru.kh.bannermanager.presentation.collection
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import androidx.activity.viewModels
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.Disposable
@@ -13,9 +12,9 @@ import ru.kh.bannermanager.data.collectionsrepo.DocumentsRepo
 import ru.kh.bannermanager.databinding.ActivityMainBinding
 import ru.kh.bannermanager.domain.appstate.DownloadDocumentsAppState
 import ru.kh.bannermanager.domain.entity.PromotionEntity
-import java.lang.Exception
+import ru.kh.bannermanager.presentation.adddocument.AddDocumentActivity
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), DocumentsAdapter.DeleteDocumentListener{
     private val binding: ActivityMainBinding by lazy { ActivityMainBinding.inflate(layoutInflater) }
     private lateinit var  viewModel: DocumentsViewModel
     private lateinit var disposable: Disposable
@@ -35,6 +34,7 @@ class MainActivity : AppCompatActivity() {
     fun init(){
         viewModel = DocumentsViewModel(DocumentsRepo())
         disposable = viewModel.getData().observeOn(AndroidSchedulers.mainThread()).subscribe{render(it)}
+        binding.addDocumentFab.setOnClickListener{openAddDocumentActivity()}
     }
 
     fun showProgressBar(){
@@ -50,15 +50,20 @@ class MainActivity : AppCompatActivity() {
     fun showDocuments(data: ArrayList<PromotionEntity>){
         binding.documentsRecyclerView.apply {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+            _adapter.setDeleteListener(this@MainActivity)
             _adapter.setData(data)
             adapter = _adapter
         }
 
     }
 
-
     fun showError(exception: Throwable){
         Toast.makeText(this, exception.toString(), Toast.LENGTH_SHORT).show()
+    }
+
+    fun openAddDocumentActivity(){
+        val intent = Intent(this, AddDocumentActivity::class.java)
+        startActivity(intent)
     }
 
     fun render(appState: DownloadDocumentsAppState){
@@ -74,5 +79,9 @@ class MainActivity : AppCompatActivity() {
                 showError(appState.error)
             }
         }
+    }
+
+    override fun deleteDocument(id: String) {
+        viewModel.deleteDocument(id)
     }
 }
