@@ -27,6 +27,15 @@
             android:layout_height="match_parent"
             android:visibility="invisible"
             />
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:src="@drawable/ic_baseline_add_24"
+            android:layout_margin="@dimen/margin_top_and_bottom"
+            android:id="@+id/add_document_fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|bottom"
+            />
     </FrameLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -7,16 +7,19 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.disposables.Disposable
+import ru.kh.bannermanager.data.collectionsrepo.DocumentsRepo
 import ru.kh.bannermanager.databinding.ActivityMainBinding
-import ru.kh.bannermanager.domain.appstate.AppState
+import ru.kh.bannermanager.domain.appstate.DownloadDocumentsAppState
 import ru.kh.bannermanager.domain.entity.PromotionEntity
 import java.lang.Exception
 
 class MainActivity : AppCompatActivity() {
     private val binding: ActivityMainBinding by lazy { ActivityMainBinding.inflate(layoutInflater) }
-    private val viewModel: DocumentsViewModel by viewModels()
+    private lateinit var  viewModel: DocumentsViewModel
+    private lateinit var disposable: Disposable
 
-    private val observer: Observer<AppState> by lazy { Observer <AppState> {state -> render(state)} }
     private val _adapter = DocumentsAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,9 +28,13 @@ class MainActivity : AppCompatActivity() {
         init()
     }
 
+    override fun onDestroy() {
+        disposable.dispose()
+        super.onDestroy()
+    }
     fun init(){
-        viewModel.getData().observe(this, observer)
-
+        viewModel = DocumentsViewModel(DocumentsRepo())
+        disposable = viewModel.getData().observeOn(AndroidSchedulers.mainThread()).subscribe{render(it)}
     }
 
     fun showProgressBar(){
@@ -50,20 +57,20 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    fun showError(exception: Exception){
+    fun showError(exception: Throwable){
         Toast.makeText(this, exception.toString(), Toast.LENGTH_SHORT).show()
     }
 
-    fun render(appState: AppState){
+    fun render(appState: DownloadDocumentsAppState){
         when(appState){
-            is AppState.Loading -> {
+            is DownloadDocumentsAppState.Loading -> {
                 showProgressBar()
             }
-            is AppState.Success -> {
+            is DownloadDocumentsAppState.Success -> {
                 hideProgressBar()
                 showDocuments(appState.data)
             }
-            is AppState.Error -> {
+            is DownloadDocumentsAppState.Error -> {
                 showError(appState.error)
             }
         }
