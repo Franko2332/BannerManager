@@ -1,25 +1,24 @@
-package ru.kh.bannermanager.presentation.collection
+package ru.kh.bannermanager.presentation.promotions
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import io.reactivex.rxjava3.disposables.Disposable
-import ru.kh.bannermanager.data.collectionsrepo.DocumentsRepo
+import ru.kh.bannermanager.data.collectionsrepo.PromotionsRepo
 import ru.kh.bannermanager.databinding.ActivityMainBinding
-import ru.kh.bannermanager.domain.appstate.DownloadDocumentsAppState
+import ru.kh.bannermanager.domain.appstate.DownloadPromotionsAppState
 import ru.kh.bannermanager.domain.entity.PromotionEntity
-import ru.kh.bannermanager.presentation.adddocument.AddDocumentActivity
+import ru.kh.bannermanager.presentation.adddocument.AddPromotionActivity
 
-class MainActivity : AppCompatActivity(), DocumentsAdapter.DeleteDocumentListener{
+class MainActivity : AppCompatActivity(), PromotionsAdapter.DeleteDocumentListener{
     private val binding: ActivityMainBinding by lazy { ActivityMainBinding.inflate(layoutInflater) }
-    private lateinit var  viewModel: DocumentsViewModel
-    private lateinit var disposable: Disposable
+    private val observer: Observer<DownloadPromotionsAppState> by lazy { Observer { render(it) } }
+    private lateinit var  viewModel: PromotionsViewModel
 
-    private val _adapter = DocumentsAdapter()
+    private val _adapter = PromotionsAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,14 +26,11 @@ class MainActivity : AppCompatActivity(), DocumentsAdapter.DeleteDocumentListene
         init()
     }
 
-    override fun onDestroy() {
-        disposable.dispose()
-        super.onDestroy()
-    }
     fun init(){
-        viewModel = DocumentsViewModel(DocumentsRepo())
-        disposable = viewModel.getData().observeOn(AndroidSchedulers.mainThread()).subscribe{render(it)}
-        binding.addDocumentFab.setOnClickListener{openAddDocumentActivity()}
+        viewModel = PromotionsViewModel(PromotionsRepo()).apply {
+            getData().observe(this@MainActivity, observer)
+        }
+        binding.addDocumentFab.setOnClickListener{ openAddDocumentActivity()}
     }
 
     fun showProgressBar(){
@@ -62,20 +58,20 @@ class MainActivity : AppCompatActivity(), DocumentsAdapter.DeleteDocumentListene
     }
 
     fun openAddDocumentActivity(){
-        val intent = Intent(this, AddDocumentActivity::class.java)
+        val intent = Intent(this, AddPromotionActivity::class.java)
         startActivity(intent)
     }
 
-    fun render(appState: DownloadDocumentsAppState){
+    fun render(appState: DownloadPromotionsAppState){
         when(appState){
-            is DownloadDocumentsAppState.Loading -> {
+            is DownloadPromotionsAppState.Loading -> {
                 showProgressBar()
             }
-            is DownloadDocumentsAppState.Success -> {
+            is DownloadPromotionsAppState.Success -> {
                 hideProgressBar()
                 showDocuments(appState.data)
             }
-            is DownloadDocumentsAppState.Error -> {
+            is DownloadPromotionsAppState.Error -> {
                 showError(appState.error)
             }
         }

@@ -13,12 +13,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BannerManager">
         <activity
-            android:name=".presentation.adddocument.AddDocumentActivity"
+            android:name=".presentation.adddocument.AddPromotionActivity"
             android:exported="false"
             android:label="@string/title_activity_add_document"
             android:theme="@style/Theme.BannerManager.NoActionBar" />
         <activity
-            android:name=".presentation.collection.MainActivity"
+            android:name=".presentation.promotions.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

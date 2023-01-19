@@ -1,6 +1,6 @@
-package ru.kh.bannermanager.presentation.collection
+package ru.kh.bannermanager.presentation.promotions
 
-import android.util.Log
+
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import ru.kh.bannermanager.R
 import ru.kh.bannermanager.domain.entity.PromotionEntity
 
-class DocumentsAdapter : RecyclerView.Adapter<DocumentsAdapter.CollectionItemHolder>() {
+class PromotionsAdapter : RecyclerView.Adapter<PromotionsAdapter.CollectionItemHolder>() {
     class CollectionItemHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val title = itemView.findViewById<TextView>(R.id.document_title)
         val description = itemView.findViewById<TextView>(R.id.document_description)
@@ -22,8 +22,9 @@ class DocumentsAdapter : RecyclerView.Adapter<DocumentsAdapter.CollectionItemHol
         fun deleteDocument(id : String)
     }
 
-    private var data = ArrayList<PromotionEntity>()
+    private var data  = ArrayList<PromotionEntity>()
     private lateinit var deleteListener: DeleteDocumentListener
+
     fun setData(data: ArrayList<PromotionEntity>) {
         this.data = data
     }
