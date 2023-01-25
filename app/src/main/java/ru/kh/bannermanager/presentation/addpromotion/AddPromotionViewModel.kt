@@ -1,4 +1,4 @@
-package ru.kh.bannermanager.presentation.adddocument
+package ru.kh.bannermanager.presentation.addpromotion
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -18,4 +18,6 @@ class AddPromotionViewModel(private val repo: Repo) {
         )
         return addPromotionLiveData
     }
+
+
 }

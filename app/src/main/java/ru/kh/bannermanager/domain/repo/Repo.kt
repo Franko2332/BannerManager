@@ -6,6 +6,6 @@ import ru.kh.bannermanager.domain.entity.PromotionEntity
 
 interface Repo {
     fun getPromotions(): Single<ArrayList<PromotionEntity>>
-    fun deletePromotion(id: String)
-    fun addPromotion(document: PromotionEntity): Completable
+    fun deletePromotion(id: String): Completable
+    fun addPromotion(promotion: PromotionEntity): Completable
 }

@@ -1,6 +1,7 @@
 package ru.kh.bannermanager.presentation.promotions
 
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,6 +9,8 @@ import android.widget.ImageView
 import android.widget.PopupMenu
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import io.reactivex.rxjava3.core.Completable
+import io.reactivex.rxjava3.kotlin.subscribeBy
 import ru.kh.bannermanager.R
 import ru.kh.bannermanager.domain.entity.PromotionEntity
 
@@ -18,18 +21,18 @@ class PromotionsAdapter : RecyclerView.Adapter<PromotionsAdapter.CollectionItemH
         val popuMenu = itemView.findViewById<ImageView>(R.id.img_popup_menu)
     }
 
-    interface DeleteDocumentListener{
-        fun deleteDocument(id : String)
+    interface DeleteDocumentListener {
+        fun deleteDocument(id: String): Completable
     }
 
-    private var data  = ArrayList<PromotionEntity>()
+    private var data = ArrayList<PromotionEntity>()
     private lateinit var deleteListener: DeleteDocumentListener
 
     fun setData(data: ArrayList<PromotionEntity>) {
         this.data = data
     }
 
-    fun setDeleteListener(listener: DeleteDocumentListener){
+    fun setDeleteListener(listener: DeleteDocumentListener) {
         deleteListener = listener
     }
 
@@ -50,11 +53,14 @@ class PromotionsAdapter : RecyclerView.Adapter<PromotionsAdapter.CollectionItemH
                 when (it.itemId) {
                     R.id.delete_popup_menu_item -> {
                         val actualPosition = holder.adapterPosition
-                        deleteListener.deleteDocument(data[actualPosition].id!!)
-                        data.removeAt(actualPosition)
-                        notifyItemRemoved(actualPosition)
-                        notifyItemRangeChanged(actualPosition, data.size)
-
+                        deleteListener.deleteDocument(data[actualPosition].id!!).subscribeBy(
+                            onError = { error -> Log.e("ERROR", error.toString()) },
+                            onComplete = {
+                                data.removeAt(actualPosition)
+                                notifyItemRemoved(actualPosition)
+                                notifyItemRangeChanged(actualPosition, data.size)
+                            }
+                        )
                     }
                 }
                 true

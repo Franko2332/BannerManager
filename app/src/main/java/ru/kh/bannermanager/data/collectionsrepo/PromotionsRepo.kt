@@ -26,18 +26,25 @@ class PromotionsRepo() : Repo {
                 }
         }
 
-    override fun deletePromotion(id: String) {
+    override fun deletePromotion(id: String): Completable = Completable.create { emitter ->
         FirebaseFirestore.getInstance().collection(COLLECTION_NAME).document(id.toString()).delete()
             .addOnSuccessListener {
+                emitter.onComplete()
                 Log.v("FIRESTORE", "DELETE IS SUCCESS")
-            }.addOnFailureListener { Log.e("ERROR", it.toString()) }
+            }.addOnFailureListener {
+                emitter.onError(it)
+                Log.e("ERROR", it.toString())
+            }
     }
 
-    override fun addPromotion(document: PromotionEntity): Completable = Completable.create { emitter ->
-        FirebaseFirestore.getInstance().collection(COLLECTION_NAME).document(document.title.toString())
-            .set(document).addOnSuccessListener {
-                emitter.onComplete()
-            }.addOnFailureListener { emitter.onError(it) }
-    }
+
+    override fun addPromotion(promotion: PromotionEntity): Completable =
+        Completable.create { emitter ->
+            FirebaseFirestore.getInstance().collection(COLLECTION_NAME)
+                .document(promotion.id.toString()).set(promotion)
+                .addOnSuccessListener {
+                    emitter.onComplete()
+                }.addOnFailureListener { emitter.onError(it) }
+        }
 
 }
