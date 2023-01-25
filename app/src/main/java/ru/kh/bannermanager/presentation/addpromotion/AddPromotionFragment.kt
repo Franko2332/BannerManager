@@ -110,7 +110,6 @@ class AddPromotionFragment : Fragment() {
         val sdf = SimpleDateFormat("yyyy-MM-dd", Locale("ru", "RU"))
         val netDate = Date(timestamp.seconds / 1000 )
         return sdf.format(netDate).toString()
-
     }
 
     private fun isValidDataForAdding(): Boolean =
